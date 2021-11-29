@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:wght@100;300;400&display=swap');
+
+@mixin tableDefaults {
+    display: grid;
+    grid-template-columns: 1fr 4fr 6fr;
+    @media (max-width: 1200px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+@mixin containderDefaults {
+    padding-left: 36px;
+    padding-right: 36px;
+    @media (max-width: 1200px) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+$mainFonts: 'Merriweather', serif;
+$subFonts: 'Roboto';
+
+body {
+    font-family: $mainFonts;
+    color: rgb(48, 48, 48);
+}
+
+header {
+    @include containderDefaults;
+    margin-bottom: 100px;
+    h1 {
+        font-size: 36px;
+        padding: 36px 0;
+        letter-spacing: 1.4px;
+        font-weight: 300;
+        line-height: 1.2;
+        @media (max-width: 1200px) {
+            padding: 32px 0;
+            font-size: 30px;
+        }
+    }
+}
+
+main {
+    @include containderDefaults;
+    margin-bottom: 100px;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    .projects___header {
+        @include tableDefaults;
+        .projects___divider {
+            font-size: 14px;
+            font-family: $subFonts;
+            padding: 10px 0;
+            font-weight: 300;
+        }
+        @media (max-width: 1200px) {
+            display: none;   
+        }
+    }
+    .projects___container {
+        @include tableDefaults;
+        border-top: solid 1px #333;
+        position: relative;
+        align-items: center;
+        cursor: pointer;
+        &:last-child {
+            border: none;
+        }
+        &:hover {
+            font-style: italic;
+        }
+        .projects___contents {
+            font-weight: 300;
+            font-size: 20px;
+            padding: 20px 0;
+        }
+        .eye {
+            font-size: 24px;
+            text-decoration: none;
+            color: #888;
+            position: absolute;
+            right: 0;
+        }
+        @media (max-width: 1200px) {
+            .year, .kinds {
+                display: none;
+            }
+        }
+    }
+}
+
+.members, .about {
+    @include containderDefaults;
+    margin-bottom: 60px;
+    h2 {
+        font-size: 26px;
+        line-height: 1.8;
+        font-weight: 300;
+        letter-spacing: 1px;
+        @media (max-width: 1200px) {
+            font-size: 22px;
+        }
+        span {
+            font-family: $subFonts;
+            letter-spacing: 0.4px;
+            font-size: 14px;
+            padding-right: 8px;
+            font-weight: 600;
+            @media (max-width: 1200px) {
+                font-size: 12px;
+            }
+        }
+        a {
+           color:rgb(48, 48, 48);
+           &:hover {
+               font-style: italic;
+           } 
+        }
+    }
+    p {
+        margin-top: 30px;
+        font-size: 12px;
+        font-family: $subFonts;
+        letter-spacing: 0.4px;
+    }
+}
+
+.projects___details {
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+    transform: translateY(-100px);
+    max-width: 1400px;
+    margin: 0 auto;
+    transition: 0.3s;
+    overflow-y: hidden;
+    &.active {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .desc {
+        padding: 40px 0;
+        width: 50%;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.6;
+        letter-spacing: 0.8px;
+        @media (max-width: 1200px) {
+            width: auto;
+        }
+    }
+    .credits {
+        padding: 20px 0;
+        font-family: $subFonts;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+    .image {
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        overflow-x: hidden;
+        display: flex;
+        .left, .right {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+            cursor: w-resize;
+        }
+        .right {
+            right: 0;
+            cursor: e-resize;
+        }
+        img {
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+    }
+    .control {
+        padding-top: 20px;
+        padding-bottom: 40px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        @media (max-width: 800px) {
+            padding-top: 0;
+            padding-bottom: 30px;
+            gap: 6px;
+        }
+        .indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            cursor: pointer;
+            &.active {
+                background-color: #333;
+            }
+            @media (max-width: 800px) {
+                width: 6px;
+                height: 6px;
+            }
+        }
+    }
+}
